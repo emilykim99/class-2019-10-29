@@ -9,6 +9,7 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE)
 library(tidyverse)
 library(googlesheets4)
+library(infer)
 
 ```
 
@@ -26,7 +27,19 @@ x %>% mutate(proportion = (red/25)) %>% na.omit() %>%
 bowl <- tibble(id = 1:10000,
                bead = c(rep("red", 2000), rep("white", 8000)))
 
-sample(bowl)
+
+# Sample from bowl
+virtual_samples <- rep_sample_n(bowl, size = 25, replace = TRUE, reps = 1000)
+
+
+virtual_samples %>%
+  filter(bead == "red") %>%
+  group_by(replicate) %>% 
+  count() %>%
+  mutate(prop = n/25) %>%
+  ggplot(aes(x = prop)) + geom_histogram()
+
+
 ```
 
 
