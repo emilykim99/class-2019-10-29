@@ -1,6 +1,6 @@
 ---
 title: "Class 2019 10-29"
-author: "Emily Kim"
+author: "Emily Kim, Billy Koech"
 date: "10/29/2019"
 output: html_document
 ---
